@@ -22,16 +22,16 @@ botStart = time.time()
 msg_dict = {}
 
 settings = {
-    "autoAdd": False,
-    "autoJoin": False,
-    "autoLeave": False,
-    "autoRead": False,
-    "autoRespon": False,
-    "autoJoinTicket": False,
-    "checkContact": False,
-    "checkPost": False,
-    "checkSticker": False,
-    "changePictureProfile": False,
+    "autoAdd": True,
+    "autoJoin": True,
+    "autoLeave": True,
+    "autoRead": True,
+    "autoRespon": True,
+    "autoJoinTicket": True,
+    "checkContact": True,
+    "checkPost": True,
+    "checkSticker": True,
+    "changePictureProfile": True,
     "changeGroupPicture": [],
     "keyCommand": "",
     "myProfile": {
@@ -41,12 +41,12 @@ settings = {
         "statusMessage": ""
     },
     "mimic": {
-        "copy": False,
-        "status": False,
+        "copy": True,
+        "status": True,
         "target": {}
     },
     "setKey": False,
-    "unsendMessage": False
+    "unsendMessage": True
 }
 
 read = {
@@ -332,6 +332,7 @@ def helpmessage():
                     "╠ " + key + "AutoJoin「On/Off」" + "\n" + \
                     "╠ " + key + "AutoJoinTicket「On/Off」" + "\n" + \
                     "╠ " + key + "AutoLeave「On/Off」" + "\n" + \
+                    "  "  + key + "Autokick [On/Off] " + "\n" + \
                     "╠ " + key + "AutoRead「On/Off」" + "\n" + \
                     "╠ " + key + "AutoRespon「On/Off」" + "\n" + \
                     "╠ " + key + "CheckContact「On/Off」" + "\n" + \
@@ -595,7 +596,7 @@ def clientBot(op):
         if op.type in [22, 24]:
             print ("[ 22 And 24 ] NOTIFIED INVITE INTO ROOM & NOTIFIED LEAVE ROOM")
             if settings["autoLeave"] == True:
-                sendMention(op.param1, "Oi asw @!,ngapain invite saya")
+                sendMention(op.param1, "Oi asw @!,wah aim diculik lagi nich")
                 client.leaveRoom(op.param1)
 
         if op.type == 25:
@@ -649,7 +650,7 @@ def clientBot(op):
                             elif cmd == "runtime":
                                 timeNow = time.time()
                                 runtime = timeNow - botStart
-                                runtime = format_timespan(runtime)
+                                runtime = format_timespam(runtime)
                                 client.sendMessage(to, "Bot sudah berjalan selama {}".format(str(runtime)))
                             elif cmd == "restart":
                                 client.sendMessage(to, "Berhasil merestart Bot")
@@ -657,28 +658,28 @@ def clientBot(op):
 # Pembatas Script #
                             elif cmd == "autoadd on":
                                 settings["autoAdd"] = True
-                                client.sendMessage(to, "Berhasil mengaktifkan auto add")
+                                client.sendMessage(to, "auto add aktif boss")
                             elif cmd == "autoadd off":
                                 settings["autoAdd"] = False
-                                client.sendMessage(to, "Berhasil menonaktifkan auto add")
+                                client.sendMessage(to, "auto add suksess off boss")
                             elif cmd == "autojoin on":
                                 settings["autoJoin"] = True
-                                client.sendMessage(to, "Berhasil mengaktifkan auto join")
+                                client.sendMessage(to, "auto join diaktifkan")
                             elif cmd == "autojoin off":
                                 settings["autoJoin"] = False
-                                client.sendMessage(to, "Berhasil menonaktifkan auto join")
+                                client.sendMessage(to, "auto join dimatikan")
                             elif cmd == "autoleave on":
                                 settings["autoLeave"] = True
-                                client.sendMessage(to, "Berhasil mengaktifkan auto leave")
+                                client.sendMessage(to, "auto leave aktif")
                             elif cmd == "autoleave off":
                                 settings["autoLeave"] = False
-                                client.sendMessage(to, "Berhasil menonaktifkan auto leave")
+                                client.sendMessage(to, "auto leave dimatikan")
                             elif cmd == "autorespon on":
                                 settings["autoRespon"] = True
-                                client.sendMessage(to, "Berhasil mengaktifkan auto respon")
+                                client.sendMessage(to, "auto respon on")
                             elif cmd == "autorespon off":
                                 settings["autoRespon"] = False
-                                client.sendMessage(to, "Berhasil menonaktifkan auto respon")
+                                client.sendMessage(to, "auto respon off")
                             elif cmd == "autoread on":
                                 settings["autoRead"] = True
                                 client.sendMessage(to, "Berhasil mengaktifkan auto read")
@@ -946,14 +947,14 @@ def clientBot(op):
                                 try:
                                     gCreator = group.creator.displayName
                                 except:
-                                    gCreator = "Tidak ditemukan"
+                                    gCreator = "0"
                                 if group.invitee is None:
                                     gPending = "0"
                                 else:
                                     gPending = str(len(group.invitee))
                                 if group.preventedJoinByTicket == True:
                                     gQr = "Tertutup"
-                                    gTicket = "Tidak ada"
+                                    gTicket = "tidak ada"
                                 else:
                                     gQr = "Terbuka"
                                     gTicket = "https://line.me/R/ti/g/{}".format(str(client.reissueGroupTicket(group.id)))
